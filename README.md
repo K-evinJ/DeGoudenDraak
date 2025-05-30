@@ -1,17 +1,18 @@
-Hoe moet de OTAP-omgeving lokaal opgezet worden?
+## Hoe moet de OTAP-omgeving lokaal opgezet worden?
 
-1. Clone deze repositoy vier keer, zodat je vier folders krijgt:
-    -DeGoudenDraak-dev,
-    -DeGoudenDraak-test,
-    -DeGoudenDraak-accept,
-    -DeGoudenDraak-production,
-   
-Doe dit voor iedere omgeving:
-3. Voer composer install uit.
-4. Kopieër de .env.example.
-5. Voer php artisan key:generate uit.
-6. Vul unieke databasenaam in en vul db inlog in (bijv. degoudendraak-dev en degoudendraak-test).
-7. Maak app_env dev, test, accept of production (afhankelijk van omgeving).
+1. Clone deze repository vier keer, zodat je vier folders krijgt:
+    - `DeGoudenDraak-dev`
+    - `DeGoudenDraak-test`
+    - `DeGoudenDraak-accept`
+    - `DeGoudenDraak-production`
 
-8. Zet bij accept en production app_debug op false.
-9. Zorg dat de verschillende folders zichtbaar zijn voor Laravel Herd (eventueel door de locatie waar de folders zich in bevinden toe te voegen in Herd als path bij General).
+2. Doe dit voor iedere omgeving:
+    1. Voer `composer install` uit.
+    2. Kopieer het bestand `.env.example` naar `.env`.
+    3. Voer `php artisan key:generate` uit.
+    4. Vul een unieke databasenaam in en pas de database-inloggegevens aan (bijv. `degoudendraak-dev`, `degoudendraak-test`, enz.).
+    5. Stel `APP_ENV` in op `dev`, `test`, `accept` of `production` (afhankelijk van de omgeving).
+    6. Zet bij **accept** en **production** `APP_DEBUG=false`.
+
+3. Zorg dat de verschillende folders zichtbaar zijn voor Laravel Herd  
+   (voeg eventueel de map waarin de folders staan toe aan Herd bij *General > Paths*).
