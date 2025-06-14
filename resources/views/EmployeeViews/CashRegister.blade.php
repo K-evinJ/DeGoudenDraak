@@ -1,4 +1,4 @@
-<x-employeeLayout>
+{{-- <x-employeeLayout> --}}
     <div class="grid grid-cols-2 gap-6 p-6">
         <!-- Product list -->
         <div>
@@ -90,4 +90,4 @@
             }
         }
     </script>
-</x-employeeLayout>
+{{-- </x-employeeLayout> --}}
