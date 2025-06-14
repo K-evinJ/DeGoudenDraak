@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Dish extends Model
 {
+    use HasFactory;
+
+    protected $guarded =[];
+    public $timestamps = false;
+
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot(['amount', 'original_dishprice', 'extra_information']);
