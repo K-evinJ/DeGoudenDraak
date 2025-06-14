@@ -7,9 +7,8 @@
     <title>Werknemersportaal</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
     @yield('styles')
-    @yield('scripts')
+    <script src="{{ asset('js/CashDesk.js') }}" defer></script>
 </head>
 
 <body>

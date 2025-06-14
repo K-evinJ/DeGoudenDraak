@@ -26,4 +26,19 @@ class Dish extends Model
     {
         return $this->belongsTo(DishType::class);
     }
+
+    public function getFullNumberAttribute()
+    {
+        return ($this->number ?? '') . ($this->menu_addition ?? '');
+    }
+
+    public function getCurrentPriceAttribute()
+    {
+        if ($this->discount) {
+            $discountAmount = $this->price * ($this->discount / 100);
+            return round($this->price - $discountAmount, 2);
+        }
+
+        return $this->price;
+    }
 }

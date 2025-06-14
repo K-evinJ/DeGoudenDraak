@@ -22,7 +22,7 @@ class DishFactory extends Factory
             DishType::factory()->count(5)->create();
         }
         return [
-            'number' => Dish::max('number') ? Dish::max('number') + 1 : 1,
+            'number' => Dish::max('number') ?? 1,
             'name' => $this->faker->words(3, true),
             // Price: decimal between 1.00 and 50.00
             'price' => $this->faker->randomFloat(2, 1, 50),

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Dish::factory()->create();
         Employee::factory()->create();
+        Dish::factory(100)->create();
     }
 }
