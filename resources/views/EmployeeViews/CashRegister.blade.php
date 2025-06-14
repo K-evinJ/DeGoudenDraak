@@ -17,29 +17,40 @@
         </div>
         <div>
             <form>
-            <table class='itemSelectedTable h-148 w-184 overflow-y-auto border border-blue-400'>
-                @foreach($groupedDishes as $type => $dishes)
-                    @foreach($dishes as $dish)
-                        <tr class="hidden menuItem_{{ $dish->id }}" data-price="{{ $dish->current_price }}">
-                            <td>
-                                <p>{{ $dish->full_number }}.</p>
-                            </td>
-                            <td>
-                                <p>{{ $dish->name }}</p>
-                            </td>
-                            <td>
-                                <p>€{{number_format($dish->current_price,2)}}</p>
-                                <p class="hidden subAmount"></p>
-                            </td>
-                            <td>
-                                <input type="number" name="{{ $dish->id }}" min="0" value="0">
-                            </td>
+            <div class="border border-blue-400 mt-5 overflow-y-auto h-144">
+                <table class='itemSelectedTable w-180'>
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center font-semibold text-lg p-5">
+                                Bestelling
+                            </th>
                         </tr>
-                    @endforeach
-                @endforeach
-            </table>
+                    </thead>
+                    <tbody class="flex flex-col">
+                        @foreach($groupedDishes as $type => $dishes)
+                            @foreach($dishes as $dish)
+                                <tr class="hidden menuItem_{{ $dish->id }}" data-price="{{ $dish->current_price }}">
+                                    <td>
+                                        <p>{{ $dish->full_number }}.</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $dish->name }}</p>
+                                    </td>
+                                    <td>
+                                        <p>€{{number_format($dish->current_price,2)}}</p>
+                                        <p class="hidden subAmount"></p>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="{{ $dish->id }}" min="0" value="0">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             </form>
-            <div id="itemsSelectedTotal" class="p-4 border border-blue-400 w-180">
+            <div id="itemsSelectedTotal" class="p-4 border border-blue-400 rounded w-180">
                 <div class="flex items-center">
                 <!-- Left side: Totaal text -->
                     <p class="flex-grow font-semibold text-lg">

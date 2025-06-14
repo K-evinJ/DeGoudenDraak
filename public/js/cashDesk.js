@@ -5,11 +5,13 @@ menuItems.forEach(button => {
         const dishId = event.target.value;
         const menuItemRow = document.querySelector(`.itemSelectedTable .menuItem_${dishId}`);
         const input = menuItemRow.querySelector("input");
+        const body = menuItemRow.parentElement;
 
-        // Increment quantity
         input.value = parseInt(input.value || 0) + 1;
+        if(input.value == 1){
+            body.appendChild(menuItemRow);
+        }
 
-        // Show the row and mark it selected
         menuItemRow.classList.remove("hidden");
         menuItemRow.classList.add("selected");
 
