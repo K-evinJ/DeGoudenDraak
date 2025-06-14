@@ -7,15 +7,18 @@ menuItems.forEach(button => {
         const input = menuItemRow.querySelector("input");
         const body = menuItemRow.parentElement;
 
-        input.value = parseInt(input.value || 0) + 1;
-        if(input.value == 1){
+        let quantity = parseInt(input.value || 0);
+        
+        // Only move the row to the end when it's first added
+        if (quantity === 0) {
             body.appendChild(menuItemRow);
         }
+        quantity += 1;
+        input.value = quantity;
 
         menuItemRow.classList.remove("hidden");
         menuItemRow.classList.add("selected");
 
-        // Update subtotal for this dish
         const price = parseFloat(menuItemRow.dataset.price);
         const subAmountEl = document.querySelector(`.menuItem_${dishId} .subAmount`);
         subAmountEl.innerHTML = (price * input.value).toFixed(2).replace(".", ",");
@@ -33,6 +36,7 @@ selectedMenuItemsInput.forEach(input => {
         const dishId = input.name;
         const menuItemRow = document.querySelector(`.itemSelectedTable .menuItem_${dishId}`);
         const price = parseFloat(menuItemRow.dataset.price);
+        if (input.value < 0) input.value = 0;
 
         if (input.value == 0) {
             menuItemRow.classList.add("hidden");

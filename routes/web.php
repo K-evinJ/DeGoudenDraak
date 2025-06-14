@@ -13,6 +13,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
 
 Route::middleware([Authenticate::class])->group(function () {
-    Route::get('/cash', [CashRegisterController::class, 'index'])->name('employee.cashRegister');
-    Route::post('/employee/checkout', [CashRegisterController::class, 'store'])->name('employee.checkout');
+    Route::get('/cashRegister', [CashRegisterController::class, 'index'])->name('employee.cashRegister');
+    Route::post('/storeOrder',[CashRegisterController::class, 'store'])->name('orderCashregister');
+    Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
 });
