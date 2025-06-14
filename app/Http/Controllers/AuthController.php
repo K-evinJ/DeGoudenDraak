@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
-class AuthController extends Controller
+class AuthController
 {
-    public function index()
+    public function login()
     {
         // if (Auth::check())
         // {
