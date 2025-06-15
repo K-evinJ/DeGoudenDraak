@@ -12,10 +12,10 @@ class AuthController
     public function index()
     {
         //will be used in a different branch
-        // if (Auth::check())
-        // {
-        //     return redirect()->route()
-        // }
+        if (Auth::check())
+        {
+            return redirect()->route('employee.cashRegister');
+        }
         return view('employeeViews.login');
     }
 
@@ -34,10 +34,13 @@ class AuthController
             return redirect()->back()->with('login_error', 'Medewerker nummer of wachtwoord onjuist.');
         }
 
-        // Log in the user using a custom guard if applicable, or manually
         Auth::login($employee, false);
 
-        // return redirect()->intended('/employee/dashboard'); // Change to your desired route
-        return redirect()->back()->with('login_error', 'je zit erin hoor');
+        return redirect()->route('employee.cashRegister');
+    }
+
+    public function logoutUser(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

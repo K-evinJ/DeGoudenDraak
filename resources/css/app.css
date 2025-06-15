@@ -9,3 +9,13 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@font-face {
+    font-family: 'chinesetakeaway-regular';
+    src: url('/public/fonts/chinesetakeaway-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'chinesetakeaway-employee';
+    src: url('/public/fonts/chinesetakeaway-webfont.woff2') format('woff2');
+}
