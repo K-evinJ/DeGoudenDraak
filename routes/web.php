@@ -13,9 +13,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
 
-Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/cashRegister', [CashRegisterController::class, 'index'])->name('employee.cashRegister');
     Route::post('/storeOrder',[CashRegisterController::class, 'store'])->name('orderCashregister');
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
+    Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
 });
