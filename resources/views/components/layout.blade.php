@@ -16,7 +16,7 @@
         <div class="bg-[#ff0000] mx-[50px] my-[15px]">
         <header class="flex justify-evenly items-center mb-[-5px]">
             <x-header-logo></x-header-logo>
-            <a href="#" class="text-[yellow] font-bold font-[chinese] text-[16px] overflow-hidden whitespace-nowrap">Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!</a>
+            <a href="{{ route('sales') }}" class="text-[yellow] font-bold font-[chinese] text-[16px] overflow-hidden whitespace-nowrap">Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!</a>
             <x-header-logo></x-header-logo>
         </header>
         <div class="flex justify-between mx-[2px]">

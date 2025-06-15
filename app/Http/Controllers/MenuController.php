@@ -17,4 +17,9 @@ class MenuController extends Controller
         $news = News::orderBy('date', 'desc')->value('text');
         return view('news', ['news' => $news]);
     }
+
+    public function sales()
+    {
+        return view('sales');
+    }
 }
