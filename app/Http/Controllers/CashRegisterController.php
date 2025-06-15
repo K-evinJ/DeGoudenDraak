@@ -42,6 +42,6 @@ class CashRegisterController
     }
     $order->dishes()->attach($attachData);
     
-        return redirect()->route('employee.cashRegister')->with('success', 'Bestelling opgeslagen!');
+        return redirect()->route('employee.cashRegister')->with('order_success', true);
     }
 }

@@ -79,3 +79,11 @@ if (clearButton) {
 } else {
     console.error("ERROR: No clear button found!");
 }
+
+function showModal() {
+    document.getElementById('successModal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('successModal').classList.add('hidden');
+}

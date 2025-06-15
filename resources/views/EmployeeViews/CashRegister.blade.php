@@ -7,10 +7,10 @@
                         <div class="flex justify-between items-center my-1 text-sm">
                             <div class="flex">
                                 <p class="w-30">{{ $dish->full_number }}.</p>
-                                <p class="w-100">{{ $dish->name }}</p>
+                                <p class="w-160">{{ $dish->name }}</p>
                             </div>
                             <p>€{{ $dish->current_price }}</p>
-                            <button class="addMenuItem px-2 border border-black rounded bg-gray-200" value='{{ $dish->id }}'>toevoegen</button>
+                            <button class="addMenuItem px-2 border border-black rounded bg-gray-200 hover:bg-gray-300" value='{{ $dish->id }}'>toevoegen</button>
                         </div>
                     @endforeach
             @endforeach
@@ -63,20 +63,41 @@
                         <div class="text-lg font-semibold flex items-center">
                             <span>€&nbsp;</span>
                             <span class="totalAmount">0,00</span>
-                            </div>
+                        </div>
 
-                            <div class="flex space-x-2">
-                                <button id="payOrder" type="submit" class="px-3 py-1 bg-blue-600 text-white rounded">
-                                    Afrekenen
-                                </button>
-                                </form>
-                                <button id="clearOrder" class="px-3 py-1 bg-gray-300 text-gray-800 rounded">
-                                    Verwijderen
-                                </button>
-                            </div>
+                        <div class="flex space-x-2">
+                            <button id="payOrder" type="submit" class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
+                                Afrekenen
+                            </button>
+                            </form>
+                            <button id="clearOrder" type="button" class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
+                                Verwijderen
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="successModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
+    <!-- Background overlay -->
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+
+        <!-- Modal content -->
+            <div class="relative z-10 mx-auto mt-70 w-120 bg-white p-8 shadow-lg">
+                <div class="flex justify-between items-start">
+                    <h2 class="text-sm">Verkoop succesvol</h2>
+                    <button onclick="closeModal()" class="text-gray-600 text-2xl leading-none hover:text-black">&times;</button>
+                </div>
+            </div>
         </div>
     </div>
 </x-employeeLayout>
+
+@if(session('order_success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            showModal();
+        });
+    </script>
+@endif
