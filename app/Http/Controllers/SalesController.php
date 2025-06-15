@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Carbon;
 
 class SalesController
 {
@@ -17,10 +18,12 @@ class SalesController
             'BeginDate' => 'required',
             'EndDate' => 'required',
         ]);
-        if($validated['BeginDate'] >= $validated['EndDate']){ return redirect()->route('saleOverview')->with('order_message', 'einddatum moet voor begindatum liggen');}
+        if($validated['BeginDate'] > $validated['EndDate']){ return redirect()->route('saleOverview')->with('order_message', 'einddatum moet voor begindatum liggen');}
 
+        $end = Carbon::parse($validated['EndDate'])->addDay();
+        $begin = Carbon::parse($validated['BeginDate']);
         $orders = Order::with('dishes')
-        ->whereBetween('moment', [$validated['BeginDate'], $validated['EndDate']])
+        ->whereBetween('moment', [$begin, $end])
         ->where('is_paid',true)
         ->get();
 

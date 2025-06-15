@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const error = document.getElementById('dateError');
 
     function validateDates() {
-        if (start.value && end.value && start.value >= end.value) {
+        if (start.value && end.value && start.value > end.value) {
             error.classList.remove('hidden');
         } else {
             error.classList.add('hidden');
