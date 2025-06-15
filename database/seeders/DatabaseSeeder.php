@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Dish;
 use App\Models\Employee;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         Employee::factory()->create();
+        Dish::factory(100)->create();
     }
 }
