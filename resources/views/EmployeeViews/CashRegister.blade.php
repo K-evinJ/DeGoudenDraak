@@ -1,13 +1,13 @@
 <x-employeeLayout>
     <div class="flex">
-        <div class="overflow-y-auto h-160 w-280 m-5 me-0 border border-blue-400 rounded-l-lg p-5">
+        <div class="overflow-y-auto overflow-x-none h-160 w-[60%] m-5 me-0 border border-blue-400 rounded-l-lg p-5">
             @foreach($groupedDishes as $type => $dishes)
                 <h2 class="font-semibold text-lg justify-self-center">{{ strtoupper($type) }}</h2>
                     @foreach($dishes as $dish)
                         <div class="flex justify-between items-center my-1 text-sm">
-                            <div class="flex">
-                                <p class="w-30">{{ $dish->full_number }}.</p>
-                                <p class="w-160">{{ $dish->name }}</p>
+                            <div class="flex w-8/10">
+                                <p class="w-2/10">{{ $dish->full_number }}.</p>
+                                <p class="w-8/10">{{ $dish->name }}</p>
                             </div>
                             <p>€{{ $dish->current_price }}</p>
                             <button class="addMenuItem px-2 border border-black rounded bg-gray-200 hover:bg-gray-300" value='{{ $dish->id }}'>toevoegen</button>
@@ -20,7 +20,7 @@
             <form method="post" action="{{ route('orderCashregister') }}">
                 @csrf
             <div class="border border-blue-400 rounded-l mt-5 overflow-y-auto h-144">
-                <table class='itemSelectedTable w-180'>
+                <table class='itemSelectedTable w-full'>
                     <thead>
                         <tr>
                             <th colspan="4" class="text-center font-semibold text-lg pt-5">
