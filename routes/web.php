@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SalesController;
@@ -9,6 +10,9 @@ use Illuminate\Auth\Middleware\Authenticate;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/menukaart', [MenuController::class, 'index'])->name('menu');
+Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
