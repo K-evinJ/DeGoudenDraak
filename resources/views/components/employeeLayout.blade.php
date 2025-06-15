@@ -29,7 +29,9 @@
         @endif
     </div>
     <hr class="mx-2 h-1 bg-blue-600 border-0">
-    {{ $slot }}
+    <div class="font-[chinesetakeaway-employee]">
+        {{ $slot }}
+    </div>
 </body>
 
 </html>

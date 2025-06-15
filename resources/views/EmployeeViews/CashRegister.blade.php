@@ -2,7 +2,7 @@
     <div class="flex">
         <div class="overflow-y-auto h-160 w-280 m-5 me-0 border border-blue-400 rounded-l-lg p-5">
             @foreach($groupedDishes as $type => $dishes)
-                <h2 class="font-semibold text-2xl justify-self-center">{{ $type }}</h2>
+                <h2 class="font-semibold text-lg justify-self-center">{{ strtoupper($type) }}</h2>
                     @foreach($dishes as $dish)
                         <div class="flex justify-between items-center my-1 text-sm">
                             <div class="flex">
