@@ -40,8 +40,11 @@ class CashRegisterController
             ];
         }
     }
+    if(sizeof($attachData) == 0){
+        return redirect()->route('employee.cashRegister')->with('order_message', 'Niets geselecteerd');
+    }
     $order->dishes()->attach($attachData);
     
-        return redirect()->route('employee.cashRegister')->with('order_success', true);
+        return redirect()->route('employee.cashRegister')->with('order_message', 'Verkoop succesvol!');
     }
 }

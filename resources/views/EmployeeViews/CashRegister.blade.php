@@ -86,7 +86,7 @@
         <!-- Modal content -->
             <div class="relative z-10 mx-auto mt-70 w-120 bg-white p-8 shadow-lg">
                 <div class="flex justify-between items-start">
-                    <h2 class="text-sm">Verkoop succesvol</h2>
+                    <h2 class="text-sm">{{ session('order_message') }}</h2>
                     <button onclick="closeModal()" class="text-gray-600 text-2xl leading-none hover:text-black">&times;</button>
                 </div>
             </div>
@@ -94,7 +94,7 @@
     </div>
 </x-employeeLayout>
 
-@if(session('order_success'))
+@if(session('order_message'))
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             showModal();
