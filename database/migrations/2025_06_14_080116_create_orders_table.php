@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('is_paid');
             $table->boolean('is_delivered');
             $table->dateTime('moment');
-            $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Table::class)->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
