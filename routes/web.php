@@ -18,4 +18,5 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('/storeOrder',[CashRegisterController::class, 'store'])->name('orderCashregister');
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
+    Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
 });
