@@ -8,7 +8,7 @@ menuItems.forEach(button => {
         const body = menuItemRow.parentElement;
 
         let quantity = parseInt(input.value || 0);
-        
+
         // Only move the row to the end when it's first added
         if (quantity === 0) {
             body.appendChild(menuItemRow);
@@ -22,8 +22,7 @@ menuItems.forEach(button => {
         const price = parseFloat(menuItemRow.dataset.price);
         const subAmountEl = document.querySelector(`.menuItem_${dishId} .subAmount`);
         subAmountEl.innerHTML = (price * input.value).toFixed(2).replace(".", ",");
-
-        // Update total amount by summing all selected subtotals
+        
         updateTotalAmount();
     });
 });
