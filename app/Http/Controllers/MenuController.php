@@ -22,4 +22,9 @@ class MenuController extends Controller
     {
         return view('sales');
     }
+
+    public function contact()
+    {
+        return view('contact');
+    }
 }
