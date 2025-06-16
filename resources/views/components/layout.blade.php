@@ -16,7 +16,7 @@
         <div class="bg-[#ff0000] mx-[50px] my-[15px]">
         <header class="flex justify-evenly items-center mb-[-5px]">
             <x-header-logo></x-header-logo>
-            <a href="#" class="text-[yellow] font-bold font-[chinese] text-[16px] overflow-hidden whitespace-nowrap">Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!</a>
+            <a href="{{ route('sales') }}" class="text-[yellow] font-bold font-[chinese] text-[16px] overflow-hidden whitespace-nowrap">Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!</a>
             <x-header-logo></x-header-logo>
         </header>
         <div class="flex justify-between mx-[2px]">
@@ -35,7 +35,7 @@
                         <div class="flex border-1 gap-[2px] font-[chinese] text-[20px] p-[2px] text-white">
                             <a href="{{ route('menu') }}" class="bg-[url(/public/images/menu_bg_gradient.png)] border-1 border-white px-7 h-6 flex items-center hover:cursor-pointer">Menukaart</a>
                             <a href="{{ route('news') }}" class="bg-[url(/public/images/menu_bg_gradient.png)] border-1 border-white px-7 h-6 flex items-center hover:cursor-pointer">Nieuws</a>
-                            <a href="#" class="bg-[url(/public/images/menu_bg_gradient.png)] border-1 border-white px-7 h-6 flex items-center hover:cursor-pointer">Contact</a>
+                            <a href="{{ route('contact') }}" class="bg-[url(/public/images/menu_bg_gradient.png)] border-1 border-white px-7 h-6 flex items-center hover:cursor-pointer">Contact</a>
                         </div>
                     </div>
                     <img src="{{ asset('images/dragon-small-flipped.png') }}" alt="dragon" class="h-[200px]">
@@ -44,7 +44,7 @@
                     <div class="w-[50px]"></div>
                     {{ $slot }}
                 </div>
-                <a href="" class="self-center mt-5 font-[chinese] text-[yellow]">Naar Contact</a>
+                <a href="{{ route('contact') }}" class="self-center mt-5 font-[chinese] text-[yellow]">Naar Contact</a>
             </div>
             <div class="border-[yellow] border-l-4 border-r-4 p-[14.5px] me-[8px] my-[-16px]"></div>
         </div>
