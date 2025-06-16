@@ -5,11 +5,11 @@
                 <div class="flex flex-col h-16">
                     <div class="flex flex-row m-1">
                         <label class="w-25">Begin datum:</label>
-                        <input name="BeginDate" class="w-27 border border-gray-400 text-sm tracking-wider" id='startDate' type="date" max="Date.now()">
+                        <input name="BeginDate" class="w-27 border border-gray-400 text-sm tracking-wider" id='startDate' type="date" max="Date.now()" required>
                     </div>
                     <div class="flex flex-row m-1">
                         <label class="w-25">Eind datum:</label>
-                        <input name="EndDate" class="w-27 border border-gray-400 text-sm tracking-wider" id='endDate' type="date">
+                        <input name="EndDate" class="w-27 border border-gray-400 text-sm tracking-wider" id='endDate' type="date" required>
                     </div>
                     <p class="text-red-400 hidden" id="dateError">De einddatum moet na de begindatum liggen.</p>
                 </div>
