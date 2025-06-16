@@ -18,7 +18,7 @@
             <div class="flex justify-center items-start w-500">
                 <a href="{{ route('employee.cashRegister') }}" class="text-center border border-blue-600 w-42 pb-1 rounded-lg bg-blue-100 mx-2 mt-3 text-lg text-blue-600 font-bold">Kassa</a>
                 <a href="#" class="text-center border border-blue-600 w-42 pb-1 rounded-lg bg-blue-100 mx-2 mt-3 text-lg text-blue-600 font-bold">Gerechten</a>
-                <a href="#" class="text-center border border-blue-600 w-42 pb-1 rounded-lg bg-blue-100 mx-2 mt-3 text-lg text-blue-600 font-bold">Verkoop Overzicht</a>
+                <a href="{{ route('saleOverview') }}" class="text-center border border-blue-600 w-42 pb-1 rounded-lg bg-blue-100 mx-2 mt-3 text-lg text-blue-600 font-bold">Verkoop Overzicht</a>
                 <div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -28,7 +28,7 @@
             </div>
         @endif
     </div>
-    <hr class="mx-2 h-1 bg-blue-600 border-0">
+    <hr class="mx-2 h-0.75 bg-blue-600 border-0">
     <div class="font-[chinesetakeaway-employee]">
         {{ $slot }}
     </div>
