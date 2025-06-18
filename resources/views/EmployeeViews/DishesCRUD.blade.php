@@ -31,11 +31,11 @@
                     
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Naam</label>
-                        <input type="text" name="name" id="dish_name" class="border w-full rounded p-2" required>
+                        <input type="text" name="name" id="dish_name" class="border w-full rounded p-2" maxlength="50" required>
                     </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Beschrijving</label>
-                        <input type="text" name="description" id="dish_description" class="border w-full rounded p-2">
+                        <input type="text" name="description" id="dish_description" class="border w-full rounded p-2" maxlength="300">
                     </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Gerechttype</label>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Prijs (€)</label>
-                        <input type="number" name="price" id="dish_price" step="0.01" class="border w-full rounded p-2" required>
+                        <input type="number" name="price" id="dish_price" step="0.01" class="border w-full rounded p-2" min="0" required>
                     </div>
                     <div class="mb-4 flex items-center space-x-2">
                         <input type="checkbox" name="visible" id="is_visible" class="rounded" checked='true'>
