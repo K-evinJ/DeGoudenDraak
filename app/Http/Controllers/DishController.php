@@ -28,6 +28,9 @@ class DishController
         ]);
 
         $dish = $request->dish_id ? Dish::find($request->dish_id) : new Dish();
+        if($request->dish_id == null){
+            $dish->number = Dish::max('number') + 1;
+        }
         $dish->name = $validated['name'];
         $dish->description = $validated['description'] ?? null;
         $dish->price = $validated['price'];

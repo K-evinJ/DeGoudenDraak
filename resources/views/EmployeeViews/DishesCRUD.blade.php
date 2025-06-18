@@ -50,7 +50,7 @@
                         <input type="number" name="price" id="dish_price" step="0.01" class="border w-full rounded p-2" required>
                     </div>
                     <div class="mb-4 flex items-center space-x-2">
-                        <input type="checkbox" name="visible" id="is_visible" class="rounded">
+                        <input type="checkbox" name="visible" id="is_visible" class="rounded" checked='true'>
                         <label for="visible" class="text-sm">Zichtbaar voor klanten</label>
                     </div>
 
@@ -72,7 +72,6 @@
                     @csrf
                     <div class="flex items-center gap-2">
                         <input type="text" name="type" placeholder="Bijv. Nagerecht"
-                            value="{{ old('type') }}"
                             required class="border rounded p-2 w-full">
                         <button type="submit" class="px-3 py-1 bg-blue-200 border border-black rounded hover:bg-blue-300">
                             Toevoegen
@@ -87,7 +86,6 @@
         </div>
     </div>
 
-    {{-- Optional success modal --}}
     @if(session('dish_message'))
         <div id="successModal" class="fixed inset-0 z-50">
             <div class="absolute inset-0 bg-black opacity-40"></div>
@@ -124,5 +122,15 @@
             document.getElementById('is_visible').checked = true;
             document.getElementById('submit_button_label').innerText = 'Aanmaken';
         });
+
+        const modal = document.getElementById('successModal');
+
+        if (modal) {
+            const closeModal = () => modal.classList.add('hidden');
+
+            modal.addEventListener('click', (event) => {
+                    closeModal();
+            });
+        }
     </script>
 </x-employeeLayout>
