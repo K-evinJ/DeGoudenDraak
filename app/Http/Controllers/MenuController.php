@@ -27,4 +27,9 @@ class MenuController extends Controller
     {
         return view('contact');
     }
+
+    public function downloadMenu()
+    {
+        return view('menu');
+    }
 }

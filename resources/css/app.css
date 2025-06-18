@@ -30,3 +30,27 @@
     font-family: 'chinesetakeaway';
     src: url('/public/fonts/CHINESETAKEAWAY.ttf') format('ttf');
 }
+
+.scroll-left {
+    position: relative;
+    width: 40vw; /* Adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    height: 24px;
+}
+
+.scroll-left a {
+    position: absolute;
+    text-align: center;
+    transform: translateX(100%);
+    animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
