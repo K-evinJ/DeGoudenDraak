@@ -37,4 +37,19 @@ class DishController
 
         return redirect()->back()->with('dish_message', 'Gerecht succesvol opgeslagen.');
     }
+
+    public function storeDishType(Request $request)
+    {
+        $validated = $request->validate([
+            'type' => 'required|string|max:50',
+        ]);
+        
+        if(DishType::first('type',$validated['type']) != null){
+            return redirect()->back()->with('dish_message', 'Gerechtstype bestaat al.');
+        }
+
+        DishType::create([
+            'type' => strtolower($validated['type']),
+        ]);
+    }
 }

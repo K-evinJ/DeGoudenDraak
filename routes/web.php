@@ -24,7 +24,7 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
 
-    Route::get('/dishes', [DishController::class, 'dishesPage'])->name('dishes.storeOrUpdate');
-    Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('dishes.storeOrUpdate');
-    Route::post('/dishes/invisible', [DishController::class, 'setInvisible'])->name('dishes.setInvisible');
+    Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
+    Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
+    Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
 });

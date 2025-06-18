@@ -11,7 +11,7 @@
     <script src="{{ asset('js/CashDesk.js') }}" defer></script>
 </head>
 
-<body>
+<body >
     <div class="flex">
         <img src="images/goodpay.png" alt="" class="w-40 h-20 mx-2 mt-2 mb-1"/>
         @if(Auth::Check())

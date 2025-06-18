@@ -1,7 +1,6 @@
 <x-employeeLayout>
-    <div class="flex">
-        {{-- LEFT: List of Dishes --}}
-        <div class="overflow-y-auto h-160 w-[60%] m-5 me-0 border border-blue-400 rounded-l-lg p-5">
+    <div class="flex h-[calc(100vh-7rem)]">
+        <div class="overflow-y-auto w-[60%] m-5 me-0 border border-blue-400 rounded-l-lg p-5">
             @foreach($groupedDishes as $type => $dishes)
                 <h2 class="font-semibold text-lg">{{ strtoupper($type) }}</h2>
                 @foreach($dishes as $dish)
@@ -24,10 +23,9 @@
             @endforeach
         </div>
 
-        {{-- RIGHT: Create/Edit Dish Form --}}
         <div class="w-full mt-5 me-5">
-            <div class="border border-blue-400 rounded-l overflow-y-auto h-144 p-4">
-                <form method="POST" action="{{ route('dishes.storeOrUpdate') }}">
+            <div class="border border-blue-400 rounded-l overflow-y-auto p-4">
+                <form method="POST" action="{{ route('admin.storeOrUpdate') }}">
                     @csrf
                     <input type="hidden" name="dish_id" id="dish_id">
                     
@@ -66,6 +64,24 @@
                             <span id="submit_button_label">Aanmaken</span>
                         </button>
                     </div>
+                </form>
+            </div>
+            <div class="border border-blue-400 rounded-l overflow-y-auto p-4">
+                <h3 class="text-md font-semibold mb-2">Nieuw Gerechttype Toevoegen</h3>
+                <form method="POST" action="{{ route('admin.storeDishType') }}">
+                    @csrf
+                    <div class="flex items-center gap-2">
+                        <input type="text" name="type" placeholder="Bijv. Nagerecht"
+                            value="{{ old('type') }}"
+                            required class="border rounded p-2 w-full">
+                        <button type="submit" class="px-3 py-1 bg-blue-200 border border-black rounded hover:bg-blue-300">
+                            Toevoegen
+                        </button>
+                    </div>
+                    
+                    @error('type')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </form>
             </div>
         </div>
