@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use function Spatie\LaravelPdf\Support\pdf;
 
 class MenuController extends Controller
 {
@@ -30,6 +31,6 @@ class MenuController extends Controller
 
     public function downloadMenu()
     {
-        return view('menu');
+        return pdf('menu-pdf');
     }
 }
