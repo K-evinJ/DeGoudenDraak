@@ -16,6 +16,13 @@ class DishController
         return view('EmployeeViews.DishesCRUD', compact('groupedDishes','dishTypes'));
     }
 
+    public function employeeView(){
+        $dishes = Dish::where('visible',true)->get();
+        $groupedDishes = $dishes->groupBy('dish_type')->filter()->sortKeys();
+        $dishTypes = DishType::orderBy('type')->get();
+        return view('EmployeeViews.DishesOverview', compact('groupedDishes'));
+    }
+
     public function storeOrUpdate(Request $request)
     {
         // dd($request->all());
