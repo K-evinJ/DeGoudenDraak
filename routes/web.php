@@ -6,6 +6,7 @@ use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Controllers\DiscountsController;
 
 Route::get('/', [MenuController::class, 'sales']);
 Route::get('/menukaart', [MenuController::class, 'index'])->name('menu');
@@ -22,4 +23,6 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
+
+    Route::get('/discounts', [DiscountsController::class, 'getOrders']);
 });
