@@ -14,6 +14,10 @@ Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
 
+Route::get('/menukaart/view', function() {
+    return view('menu-pdf');
+});
+
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
 
