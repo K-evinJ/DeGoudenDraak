@@ -25,10 +25,9 @@ class DishController
 
     public function storeOrUpdate(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0|max:999.99',
             'dish_id' => 'nullable|exists:dishes,id',
             'description' => 'nullable|string|max:300',
             'dish_type' => 'required|exists:dish_types,type',
@@ -54,12 +53,14 @@ class DishController
             'type' => 'required|string|max:50',
         ]);
         
-        if(DishType::first('type',$validated['type']) != null){
+        if(DishType::find($validated['type'],'type') != null){
             return redirect()->back()->with('dish_message', 'Gerechtstype bestaat al.');
         }
 
         DishType::create([
             'type' => strtolower($validated['type']),
         ]);
+
+        return redirect()->back()->with('dish_message', 'Gerechtstype aangemaakt');
     }
 }
