@@ -19,6 +19,10 @@ Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
 
+Route::get('/gerechten', [MenuController::class, 'dishes'])->name('dishes');
+Route::post('/gerechten/favoriet-maken', [MenuController::class, 'favorite'])->name('favorite');
+Route::post('/gerechten/favoriet-verwijderen', [MenuController::class, 'unfavorite'])->name('unfavorite');
+
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
 
