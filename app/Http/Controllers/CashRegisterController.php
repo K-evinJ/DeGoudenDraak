@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Dish;
 use Carbon\Carbon;
+USE Barryvdh\DomPDF\Facade\Pdf;
 
 class CashRegisterController
 {
@@ -45,6 +46,10 @@ class CashRegisterController
     }
     $order->dishes()->attach($attachData);
     
-        return redirect()->route('employee.cashRegister')->with('order_message', 'Verkoop succesvol!');
+    $order->load('dishes');
+
+    $pdf = Pdf::loadView('employeeViews.receipt', compact('order'))->setPaper([0, 0, 240, 283], 'portrait');
+
+    return $pdf->download("Rekening_Order_{$order->id}.pdf");
     }
 }
