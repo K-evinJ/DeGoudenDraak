@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Dish;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Models\Discount;
+
 use function Spatie\LaravelPdf\Support\pdf;
 use Spatie\LaravelPdf\Enums\Format;
 
@@ -34,7 +37,7 @@ class MenuController extends Controller
     public function downloadMenu()
     {
         $dishTypes = Dish::where('visible', 1)->orderBy('number', 'asc')->get()->groupby('dish_type');
-        // dd($dishTypes);
-        return pdf('menu-pdf', ['dishTypes' => $dishTypes])->landscape();
+        $discounts = Discount::where('end_date', '>', Carbon::now())->with('dish')->get();
+        return pdf('menu-pdf', ['dishTypes' => $dishTypes, 'discounts' => $discounts])->landscape();
     }
 }
