@@ -21,6 +21,12 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('authentica
 
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/cashRegister', [CashRegisterController::class, 'index'])->name('employee.cashRegister');
+    Route::get('/receipt/{order}/download', [CashRegisterController::class, 'downloadReceipt'])->name('receipt.download');
+    Route::post('/receipt/cancel', function () {
+        session()->forget('download_receipt_order_id');
+        return redirect()->route('employee.cashRegister');
+    })->name('receipt.cancelDownload');
+
     Route::post('/storeOrder',[CashRegisterController::class, 'store'])->name('orderCashregister');
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');

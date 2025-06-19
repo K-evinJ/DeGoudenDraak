@@ -30,7 +30,7 @@ class DiscountsController
             'endDate' => 'required|date',
         ]);
 
-        if($validated['endDate'] > $validated['startDate']){
+        if($validated['endDate'] < $validated['startDate']){
             return redirect()->back()->with('message', 'Einddatum moet na de begindatum liggen.');
         }
 
