@@ -9,23 +9,19 @@
 
     <title>Menukaart</title>
 </head>
-<body class="bg-[#fefebe] p-2">
-    <div class="flex">
-        <img src="{{ asset('images/menu-pdf-corner.png') }}" class="h-6 pixel">
-        <hr class="w-full border-[2.4px] border-[#27660b]">
-        <img src="{{ asset('images/menu-pdf-corner.png') }}" class="h-6 scale-x-[-1] pixel">
-    </div>
-    <div class="flex justify-between w-full">
-        <div class="border-[2.4px] border-[#27660b]"></div>
-        <main class="p-1">
-            content
-        </main>
-        <div class="border-[2.4px] border-[#27660b]"></div>
-    </div>
-    <div class="flex items-end">
-        <img src="{{ asset('images/menu-pdf-corner.png') }}" class="h-6 scale-y-[-1] pixel">
-        <hr class="w-full border-[2.4px] border-[#27660b]">
-        <img src="{{ asset('images/menu-pdf-corner.png') }}" class="h-6 scale-y-[-1] scale-x-[-1] pixel">
-    </div>
+
+<body class="bg-[url('/public/images/menu-pdf-background.png')] [background-size:100%_100%] bg-center h-[100vh] font-[chinese]">
+    <main class="p-5 px-10 grid grid-cols-3 gap-x-5 w-full h-[91vh]">
+        @foreach ($dishTypes as $dishType => $dishes)
+        <h1 class="font-bold text-center">{{ $dishType }}</h1>
+            @foreach ($dishes as $dish)
+                <div class="flex justify-between">
+                    <span>{{ $dish->number }}. {{ $dish->name }}</span>
+                    <span class="flex grow border-b-2 border-dotted border-black h-6"></span>
+                    <span>€ {{ $dish->price }}</span>
+                </div>
+            @endforeach
+        @endforeach
+    </main>
 </body>
 </html>

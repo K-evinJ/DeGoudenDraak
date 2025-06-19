@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Dish;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CashRegisterController;
@@ -15,7 +17,8 @@ Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
 
 Route::get('/menukaart/view', function() {
-    return view('menu-pdf');
+    $dishes = Dish::where('visible', 1)->get()->groupby('dish_type');
+    return view('menu-pdf', ['dishTypes' => $dishes]);
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
