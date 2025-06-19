@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dish;
 use App\Models\News;
 use Illuminate\Http\Request;
-use App\Models\Dish;
+use Illuminate\Support\Carbon;
+use App\Models\Discount;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class MenuController extends Controller
 {
@@ -83,5 +86,12 @@ class MenuController extends Controller
         session(['favorites' => $favorites]);
 
         return redirect()->route('dishes');
+    }
+        
+    public function downloadMenu()
+    {
+        $dishTypes = Dish::where('visible', 1)->orderBy('number', 'asc')->get()->groupby('dish_type');
+        $discounts = Discount::where('end_date', '>', Carbon::now())->with('dish')->get();
+        return Pdf::view('menu-pdf', ['dishTypes' => $dishTypes, 'discounts' => $discounts])->landscape()->download('menukaart.pdf');
     }
 }
