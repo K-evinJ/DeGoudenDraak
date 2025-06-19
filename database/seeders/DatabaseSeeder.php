@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        Employee::create([
+            'password' => Hash::make('1234'),
+            'isAdmin' => true,
+        ]);
         Employee::factory()->create();
         Dish::factory(100)->create();
         News::create([

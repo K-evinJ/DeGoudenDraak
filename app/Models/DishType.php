@@ -9,6 +9,7 @@ class DishType extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $guarded = [];
 
     protected $primaryKey = 'type';
     public $incrementing = false;

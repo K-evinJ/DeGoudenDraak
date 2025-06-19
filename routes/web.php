@@ -6,6 +6,8 @@ use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Controllers\DishController;
+use App\Http\Middleware\IsAdmin;
 
 Route::get('/', [MenuController::class, 'sales']);
 Route::get('/menukaart', [MenuController::class, 'index'])->name('menu');
@@ -22,4 +24,11 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
+    Route::get('/dishesOverview',[DishController::class, 'employeeView'])->name('employeeDishes');
+
+    Route::middleware([IsAdmin::class])->group(function (){
+        Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
+        Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
+        Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
+    });
 });
