@@ -16,11 +16,6 @@ Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
 
-Route::get('/menukaart/view', function() {
-    $dishes = Dish::where('visible', 1)->get()->groupby('dish_type');
-    return view('menu-pdf', ['dishTypes' => $dishes]);
-});
-
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
 
