@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Dish;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CashRegisterController;
@@ -12,6 +14,7 @@ use App\Http\Middleware\IsAdmin;
 
 Route::get('/', [MenuController::class, 'sales']);
 Route::get('/menukaart', [MenuController::class, 'index'])->name('menu');
+Route::get('/menukaart/download', [MenuController::class, 'downloadMenu'])->name('download.menu');
 Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
