@@ -25,13 +25,13 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('/logout', [AuthController::class, 'logoutUser'])->name('logout');
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
-
-    Route::get('/discounts', [DiscountsController::class, 'index']);
     Route::get('/dishesOverview',[DishController::class, 'employeeView'])->name('employeeDishes');
 
     Route::middleware([IsAdmin::class])->group(function (){
         Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
         Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
         Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
+        Route::get('/discounts', [DiscountsController::class, 'index']);
+        Route::post('/discounts', [DiscountsController::class, 'store'])->name('storeDiscount');
     });
 });
