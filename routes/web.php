@@ -24,5 +24,5 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::get('/sales', [SalesController::class, 'index'])->name('saleOverview');
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
 
-    Route::get('/discounts', [DiscountsController::class, 'getOrders']);
+    Route::get('/discounts', [DiscountsController::class, 'index']);
 });
