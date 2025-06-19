@@ -20,7 +20,7 @@
         </div>
         <div class="border border-blue-400 rounded-l overflow-y-auto p-4 m-6 mb-2 w-[50%] h-fit">
             <h3 class="text-md font-semibold mb-2">Nieuwe Aanbieding Invoeren</h3>
-            <form method="POST" action="{{ route('storeDiscount') }}">
+            <form method="POST" action="{{ route('admin.storeDiscount') }}">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-sm font-medium mb-1">Gerecht</label>

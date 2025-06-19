@@ -31,7 +31,8 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
         Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
         Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
-        Route::get('/discounts', [DiscountsController::class, 'index']);
-        Route::post('/discounts', [DiscountsController::class, 'store'])->name('storeDiscount');
+
+        Route::get('/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
+        Route::post('/discounts', [DiscountsController::class, 'store'])->name('admin.storeDiscount');
     });
 });
