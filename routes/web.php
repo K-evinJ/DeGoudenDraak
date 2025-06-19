@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\PlanningController;
 use App\Http\Middleware\IsAdmin;
 
 Route::get('/', [MenuController::class, 'sales']);
@@ -30,5 +31,7 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
         Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
         Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
+
+        Route::get('/planning', [PlanningController::class, 'index'])->name('admin.planning');
     });
 });

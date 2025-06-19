@@ -1,6 +1,8 @@
 <x-employeeLayout>
     <div class="max-w-7xl mx-auto p-6">
+        @if ($table)
         <h1 class="text-2xl font-bold mb-6">Weekplanning Tafel {{ $table->id }}</h1>
+        @endif
 
         @if(session('message'))
             <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
@@ -9,7 +11,7 @@
         @endif
 
         {{-- Table Selection --}}
-        <form method="GET" action="{{ route('employee.planning') }}" class="mb-6">
+        <form method="GET" action="{{ route('admin.planning') }}" class="mb-6">
             <label for="table_id" class="block font-semibold mb-1">Selecteer Tafel:</label>
             <select name="table_id" id="table_id" onchange="this.form.submit()" class="border rounded p-2">
                 @foreach ($tables as $t)
@@ -51,7 +53,7 @@
             <div class="w-1/2">
                 <h2 class="text-xl font-semibold mb-4">Voeg Planning Toe</h2>
 
-                <form method="POST" action="{{ route('employee.planning.store') }}" class="space-y-4 bg-gray-50 p-6 rounded shadow-sm">
+                <form method="POST" action="" class="space-y-4 bg-gray-50 p-6 rounded shadow-sm">
                     @csrf
 
                     <input type="hidden" name="table_id" value="{{ $table->id }}">
