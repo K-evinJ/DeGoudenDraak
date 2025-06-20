@@ -42,9 +42,9 @@
             </div>
 
             <div class="w-1/2 h-[95%] overflow-y-auto">
-                <div class="border border-blue-400 rounded-tl-lg">
+                <div class="border border-blue-400 rounded-tl-lg p-3">
                     <h2 class="text-xl font-semibold mb-4">Voeg Planning Toe</h2>
-                    <form method="POST" action="" class="space-y-4 bg-gray-50 p-6 rounded shadow-sm">
+                    <form method="POST" action="" class="space-y-4">
                         @csrf
 
                         <input type="hidden" name="table_id" value="{{ $table->id }}">
@@ -77,23 +77,15 @@
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                             Planning Opslaan
                         </button>
+                        @if ($errors->has('end_time'))
+                            <p class="text-red-400" id="timeError">De eindtijd moet na de begintijd liggen.</p>
+                        @endif
                     </form>
                 </div>
                 <div class="p-3 mb-17 border border-blue-400 rounded-bl-lg">
                     <h2 class="text-lg">werknemer aanmaken</h2>
-                    @if($errors->any())
-                        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">
-                            <ul class="list-disc list-inside">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{ route('employee.store') }}">
                         @csrf
-
                         <div class="mb-4">
                             <label for="password" class="block font-medium mb-1">Wachtwoord</label>
                             <input type="password" name="password" id="password" required
@@ -103,6 +95,9 @@
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                             Werknemer Aanmaken
                         </button>
+                        @if ($errors->has('password'))
+                            <p class="text-red-400" id="timeError">wachtwoord moet minimaal 4 tekens bevatten.</p>
+                        @endif
                     </form>
                 </div>
             </div>
