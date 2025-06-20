@@ -42,7 +42,11 @@
 
     <p class="total">Totaal: €{{ number_format($grandTotal, 2, ',', '.') }}</p>
 
+<<<<<<< HEAD
+   <div class="footer flex flex-col items-center">
+=======
     <div class="footer flex flex-col items-center">
+>>>>>>> 3e3df8e107a545cd09f2317459a014fc495a86fc
         <p>Dank u voor uw bezoek!</p>
         <img src="data:image/png;base64, {{ $qr }}" alt="QR-Code naar review formulier">
         <p>Laat een review achter</p>

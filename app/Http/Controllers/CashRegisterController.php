@@ -19,9 +19,9 @@ class CashRegisterController
     
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'dishes' => 'required|array|min:1',
-        ]);
+        $decoded = json_decode($request->input('dishes'), true);
+
+        $validated = ['dishes' => $decoded];
 
         $order = Order::create([
             'is_paid' => true,
@@ -55,7 +55,7 @@ class CashRegisterController
     }
 
     public function downloadReceipt(Order $order){
-        $qr = base64_encode(QrCode::size(100)->generate(route('review')));
+        $qr = base64_encode(QrCode::size(50)->generate(route('review')));
         $pdf = Pdf::loadView('employeeViews.receipt', compact(['order', 'qr']))
         ->setPaper([0, 0, 240, 283], 'portrait');
 
