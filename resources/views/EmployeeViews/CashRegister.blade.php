@@ -1,9 +1,16 @@
 <x-employeeLayout>
+
+    @section('scripts')
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    @endsection
+
     <div class="flex flex-col w-[100vw] p-5">
-        <form class="flex w-full border border-blue-400 rounded-lg p-5">
-            <input type="text" name="search" id="search">
-            
-        </form>
+        <div id="app">
+            <form class="flex w-full border border-blue-400 rounded-lg p-5">
+                <input type="text" name="search" id="search">
+                
+            </form>
+        </div>
         <div class="flex">
             <div class="overflow-y-auto overflow-x-none h-160 w-[60%] mt-5 border border-blue-400 rounded-l-lg p-5">
                 @foreach ($groupedDishes as $type => $dishes)
@@ -21,7 +28,7 @@
                     @endforeach
                 @endforeach
             </div>
-            <div class="h-165 border border-blue-500 m-2 "></div>
+            <div class="h-165 border border-blue-500 m-2"></div>
             <div>
                 <form method="post" action="{{ route('orderCashregister') }}">
                     @csrf
@@ -118,3 +125,11 @@
         });
     </script>
 @endif
+
+<script type="module" defer>
+    import DishSearch from '/js/components/DishSearch.js'
+
+    const app = Vue.createApp({})
+    app.component('dish-search', DishSearch)
+    app.mount('#app')
+</script>
