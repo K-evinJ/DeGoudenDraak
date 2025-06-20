@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,38 +8,21 @@
     <title>Gerechten</title>
     @vite('resources/css/app.css')
 </head>
+
 <body class="font-[chinese] p-10 flex flex-col items-center h-[100vh]">
     <img src="{{ asset('images/menu-pdf-background.png') }}" class="fixed z-[-1] w-full h-full top-0 left-0">
-    <div class="flex gap-5">
-        <div class="flex text-nowrap bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-5">
-            <form action="{{ route('dishes') }}" class="flex w-full gap-x-10">
-                <div class="flex w-full gap-x-3 items-center">
-                    <strong class="text-lg text-center">Favorieten</strong>
-                    <select name="favoriteSort" id="favoriteSort" class="shadow-sm p-2 rounded-lg bg-white">
-                        <option value="name" @selected($options['favoriteSort'] === 'name')>Alphabetisch</option>
-                        <option value="number" @selected($options['favoriteSort'] === 'number')>Nummering</option>
-                    </select>
-                    <select name="favoriteOrder" id="favoriteOrder" class="shadow-sm p-2 rounded-lg bg-white">
-                        <option value="asc" @selected($options['favoriteOrder'] === 'asc')>Oplopend</option>
-                        <option value="desc" @selected($options['favoriteOrder'] === 'desc')>Aflopend</option>
-                    </select>
-                </div>
-                <div class="flex w-full gap-x-3 items-center">
-                    <strong class="text-lg text-center">Alle Gerechten</strong>
-                    <select name="normalSort" id="normalSort" class="shadow-sm p-2 rounded-lg bg-white">
-                        <option value="name" @selected($options['normalSort'] === 'name')>Alphabetisch</option>
-                        <option value="number" @selected($options['normalSort'] === 'number')>Nummering</option>
-                    </select>
-                    <select name="normalOrder" id="normalOrder" class="shadow-sm p-2 rounded-lg bg-white">
-                        <option value="asc" @selected($options['normalOrder'] === 'asc')>Oplopend</option>
-                        <option value="desc" @selected($options['normalOrder'] === 'desc')>Aflopend</option>
-                    </select>
-                </div>
-                <button type="submit" class="text-nowrap bg-white shadow-sm px-2 py-1 rounded hover:bg-red-50 cursor-pointer">Sorteren</button>
-            </form>
+    <div class="flex flex-wrap gap-5">
+        <div class="flex flex-col justify-center bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-3 gap-y-2">
+            <a href="{{ route('download.menu') }}"
+                class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50">Download Menu</a>
+            <button onclick="history.back()" class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50 cursor-pointer transition">Terug</button>
         </div>
-        <div class="flex items-center bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-3">
-            <a href="{{ route('download.menu') }}" class="p-3 rounded-lg text-nowrap bg-white hover:bg-gray-50">Download Menu</a>
+        <div class="flex text-nowrap bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-5">
+            <form action="{{ route('dishes') }}" class="flex w-full gap-x-10 items-end">
+                <x-sort-input :sort="'favoriteSort'" :order="'favoriteOrder'" :options="$options">Favorieten</x-sort-input>
+                <x-sort-input :sort="'normalSort'" :order="'normalOrder'" :options="$options">Alle Gerechten</x-sort-input>
+                <button type="submit" class="text-nowrap bg-white shadow-sm p-2 py-1 rounded hover:bg-red-50 cursor-pointer transition">Sorteren</button>
+            </form>
         </div>
     </div>
     <div class="flex flex-col overflow-y-scroll h-full w-[80vw] rounded p-5 gap-y-2">
@@ -52,4 +36,5 @@
         <x-dish-row :types="$nonFavorites" :action="'favorite'">Maak favoriet</x-dish-row>
     </div>
 </body>
+
 </html>
