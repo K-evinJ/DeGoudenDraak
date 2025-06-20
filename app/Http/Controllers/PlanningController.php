@@ -13,19 +13,16 @@ class PlanningController extends Controller
     {
         $tables = \App\Models\Table::all();
         $selectedTableId = $request->get('table_id', $tables->first()?->id);
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
+        $startDate = Carbon::now()->startOfDay();
+        $endDate = $startDate->copy()->addDays(6); 
 
-        $table = Table::with(['employees' => function ($query) use ($startOfWeek, $endOfWeek) {
-            $query->whereBetween('employee_planning.date', [
-                $startOfWeek->toDateString(),
-                $endOfWeek->toDateString(),
-            ]);
+        $table = Table::with(['employees' => function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('employee_planning.date', [$startDate, $endDate]);
         }])->find($selectedTableId);
 
         $employees = \App\Models\Employee::all();
 
-        return view('EmployeeViews.employeePlanning', compact('tables', 'table', 'employees', 'startOfWeek'));
+        return view('EmployeeViews.employeePlanning', compact('tables', 'table', 'employees', 'startDate'));
     }
 
     public function store(Request $request)
