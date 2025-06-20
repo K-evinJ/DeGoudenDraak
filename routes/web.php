@@ -42,6 +42,7 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
     Route::get('/dishesOverview',[DishController::class, 'employeeView'])->name('employeeDishes');
 
+    Route::get('/employee/planning', [PlanningController::class, 'employeePlanning'])->name('employee.planning');
     Route::middleware([IsAdmin::class])->group(function (){
         Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
         Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');

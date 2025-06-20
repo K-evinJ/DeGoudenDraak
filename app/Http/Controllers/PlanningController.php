@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Table;
 use App\Models\Planning;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PlanningController extends Controller
 {
@@ -43,5 +44,21 @@ class PlanningController extends Controller
         ]);
 
         return back()->with('message', 'Planning toegevoegd!');
+    }
+
+    public function employeePlanning()
+    {
+        $employee = Auth::user();
+        $startDate = Carbon::now()->startOfDay();
+        $endDate = $startDate->copy()->addDays(6);
+
+        // Get all planning within 7 days
+        $tables = $employee->tables()
+            ->wherePivotBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+            ->withPivot('date', 'start_time', 'end_time')
+            ->get()
+            ->groupBy(fn ($table) => $table->pivot->date);
+
+        return view('EmployeeViews.employeePlanningView', compact('tables', 'startDate'));
     }
 }
