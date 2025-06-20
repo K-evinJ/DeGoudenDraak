@@ -9,8 +9,10 @@ use App\Http\Controllers\SalesController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\DiscountsController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\PlanningController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\EmployeeController;
 
 Route::get('/', [MenuController::class, 'sales']);
 Route::get('/menukaart', [MenuController::class, 'index'])->name('menu');
@@ -43,11 +45,15 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::get('/salesInTijd', [SalesController::class, 'getOrders'])->name('salesForTimeframe');
     Route::get('/dishesOverview',[DishController::class, 'employeeView'])->name('employeeDishes');
 
+    Route::get('/employee/planning', [PlanningController::class, 'employeePlanning'])->name('employee.planning');
     Route::middleware([IsAdmin::class])->group(function (){
         Route::get('/dishes', [DishController::class, 'dishesPage'])->name('admin.dishes');
         Route::post('/dishes', [DishController::class, 'storeOrUpdate'])->name('admin.storeOrUpdate');
         Route::post('/dishes/type',[DishController::class, 'storeDishType'])->name('admin.storeDishType');
 
+        Route::get('/planning', [PlanningController::class, 'index'])->name('admin.planning');
+        Route::post('/planning', [PlanningController::class, 'store'])->name('admin.planning');
+        Route::post('/employee/create', [EmployeeController::class, 'store'])->name('employee.store');
         Route::get('/discounts', [DiscountsController::class, 'index'])->name('admin.discounts');
         Route::post('/discounts', [DiscountsController::class, 'store'])->name('admin.storeDiscount');
     });

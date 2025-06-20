@@ -45,6 +45,6 @@ class Employee extends Authenticatable
 
     public function tables()
     {
-        return $this->belongsToMany(Table::class)->withPivot(['date', 'start_time', 'end_time']);
+        return $this->belongsToMany(Table::class, 'employee_planning')->withPivot(['date', 'start_time', 'end_time']);
     }
 }
