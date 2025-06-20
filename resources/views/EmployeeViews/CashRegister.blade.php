@@ -94,6 +94,15 @@
     </div>
 </x-employeeLayout>
 
+@if(session('download_receipt_order_id'))
+<script>
+    if(confirm('Wilt u de rekening downloaden?')) {
+        // Open the PDF download in a new tab
+        window.open("{{ route('receipt.download', ['order' => session('download_receipt_order_id')]) }}", '_blank');
+    }
+</script>
+@endif
+
 @if(session('order_message'))
     <script>
         document.addEventListener('DOMContentLoaded', () => {

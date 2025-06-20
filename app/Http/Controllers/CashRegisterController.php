@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Dish;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CashRegisterController
 {
@@ -29,22 +30,33 @@ class CashRegisterController
 
         $attachData = [];
 
-    foreach ($validated['dishes'] as $dishId => $quantity) {
-        if($quantity > 0){
-            $dish = \App\Models\Dish::findOrFail($dishId);
+        foreach ($validated['dishes'] as $dishId => $quantity) {
+            if ($quantity > 0) {
+                $dish = Dish::findOrFail($dishId);
 
-            $attachData[$dishId] = [
-                'amount' => $quantity,
-                'original_dishprice' => $dish->current_price,
-                'extra_information' => null,
-            ];
+                $attachData[$dishId] = [
+                    'amount' => $quantity,
+                    'original_dishprice' => $dish->current_price,
+                    'extra_information' => null,
+                ];
+            }
         }
-    }
-    if(sizeof($attachData) == 0){
-        return redirect()->route('employee.cashRegister')->with('order_message', 'Niets geselecteerd');
-    }
-    $order->dishes()->attach($attachData);
-    
+
+        if (count($attachData) === 0) {
+            return redirect()->route('employee.cashRegister')->with('order_message', 'Niets geselecteerd');
+        }
+
+        $order->dishes()->attach($attachData);
+
+        session()->flash('download_receipt_order_id', $order->id);
+        
         return redirect()->route('employee.cashRegister')->with('order_message', 'Verkoop succesvol!');
+    }
+
+    public function downloadReceipt(Order $order){
+        $pdf = Pdf::loadView('employeeViews.receipt', compact('order'))
+        ->setPaper([0, 0, 240, 283], 'portrait');
+
+    return $pdf->download("Rekening_Order_{$order->id}.pdf");
     }
 }

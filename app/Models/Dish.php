@@ -34,8 +34,10 @@ class Dish extends Model
 
     public function getCurrentPriceAttribute()
     {
-        if ($this->discount) {
-            $discountAmount = $this->price * ($this->discount / 100);
+        $discount = $this->discount;
+
+        if ($discount && now()->between($discount->start_date, $discount->end_date)) {
+            $discountAmount = $this->price * ($discount->discount_percentage / 100);
             return round($this->price - $discountAmount, 2);
         }
 
