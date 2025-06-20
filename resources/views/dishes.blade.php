@@ -13,9 +13,8 @@
     <img src="{{ asset('images/menu-pdf-background.png') }}" class="fixed z-[-1] w-full h-full top-0 left-0">
     <div class="flex flex-wrap gap-5">
         <div class="flex flex-col justify-center bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-3 gap-y-2">
-            <a href="{{ route('download.menu') }}"
-                class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50">Download Menu</a>
-            <button onclick="history.back()" class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50 cursor-pointer transition">Terug</button>
+            <a href="{{ route('download.menu') }}" class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50">Download Menu</a>
+            <a href="{{ route('menu') }}" class="p-2 py-1 rounded-lg text-nowrap bg-white hover:bg-red-50 cursor-pointer transition">Terug</a>
         </div>
         <div class="flex text-nowrap bg-[rgba(255,255,255,0.5)] shadow-sm rounded-lg p-5">
             <form action="{{ route('dishes') }}" class="flex w-full gap-x-10 items-end">
