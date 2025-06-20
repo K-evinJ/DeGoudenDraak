@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignIdFor(Table::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Employee::class)->constrained()->cascadeOnDelete();
             $table->date('date');
-            $table->primary(['table_id', 'employee_id', 'date']);
             $table->time('start_time');
+            $table->primary(['table_id', 'employee_id', 'date', 'start_time']);
             $table->time('end_time');
         });
     }

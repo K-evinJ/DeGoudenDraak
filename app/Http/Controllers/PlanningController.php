@@ -2,11 +2,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Employee;
 use App\Models\Table;
-use App\Models\Planning;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PlanningController extends Controller
 {
@@ -36,6 +35,18 @@ class PlanningController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
+        $exists = DB::table('employee_planning')
+        ->where('table_id', $validated['table_id'])
+        ->where('employee_id', $validated['employee_id'])
+        ->where('date', $validated['date'])
+        ->where('start_time', $validated['start_time'])
+        ->exists();
+
+        if ($exists) {
+            return back()
+                ->with(['message' => 'Deze werknemer is al gepland voor deze tafel op dit tijdstip.']);
+        }
+
         $table = \App\Models\Table::findOrFail($validated['table_id']);
         $table->employees()->attach($validated['employee_id'], [
             'date' => $validated['date'],
@@ -57,6 +68,7 @@ class PlanningController extends Controller
             ->wherePivotBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
             ->withPivot('date', 'start_time', 'end_time')
             ->get()
+            ->sortBy(fn ($table) => $table->pivot->start_time)
             ->groupBy(fn ($table) => $table->pivot->date);
 
         return view('EmployeeViews.employeePlanningView', compact('tables', 'startDate'));
