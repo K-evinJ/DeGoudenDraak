@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Dish;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CashRegisterController
 {
@@ -18,9 +19,9 @@ class CashRegisterController
     
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'dishes' => 'required|array|min:1',
-        ]);
+        $decoded = json_decode($request->input('dishes'), true);
+
+        $validated = ['dishes' => $decoded];
 
         $order = Order::create([
             'is_paid' => true,
@@ -54,7 +55,8 @@ class CashRegisterController
     }
 
     public function downloadReceipt(Order $order){
-        $pdf = Pdf::loadView('employeeViews.receipt', compact('order'))
+        $qr = base64_encode(QrCode::size(100)->generate(route('review')));
+        $pdf = Pdf::loadView('employeeViews.receipt', compact(['order', 'qr']))
         ->setPaper([0, 0, 240, 283], 'portrait');
 
     return $pdf->download("Rekening_Order_{$order->id}.pdf");

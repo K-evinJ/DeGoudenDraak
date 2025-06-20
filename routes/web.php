@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Dish;
-
+use App\Http\Controllers\APIController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CashRegisterController;
@@ -49,3 +48,5 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::post('/discounts', [DiscountsController::class, 'store'])->name('admin.storeDiscount');
     });
 });
+
+Route::get('/api/dishes', [APIController::class, 'dishes'])->name('api.dishes');
