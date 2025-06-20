@@ -9,6 +9,7 @@ use App\Http\Controllers\SalesController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\DiscountsController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\IsAdmin;
 
 Route::get('/', [MenuController::class, 'sales']);
@@ -17,6 +18,9 @@ Route::get('/menukaart/download', [MenuController::class, 'downloadMenu'])->name
 Route::get('/nieuws', [MenuController::class, 'news'])->name('news');
 Route::get('/aanbiedingen', [MenuController::class, 'sales'])->name('sales');
 Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
+
+Route::get('/review', [ReviewController::class, 'index'])->name('review');
+Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
 
 Route::get('/gerechten', [MenuController::class, 'dishes'])->name('dishes');
 Route::post('/gerechten/favoriet-maken', [MenuController::class, 'favorite'])->name('favorite');

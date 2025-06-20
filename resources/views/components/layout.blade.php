@@ -41,7 +41,7 @@
                     </div>
                     <img src="{{ asset('images/dragon-small-flipped.png') }}" alt="dragon" class="h-[200px]">
                 </div>
-                <div class="flex mt-[54px]">
+                <div class="flex justify-center mt-[54px]">
                     <div class="w-[50px]"></div>
                     {{ $slot }}
                 </div>

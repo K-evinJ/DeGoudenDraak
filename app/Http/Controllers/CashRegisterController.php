@@ -55,7 +55,7 @@ class CashRegisterController
     }
 
     public function downloadReceipt(Order $order){
-        $qr = base64_encode(QrCode::size(100)->generate(route('review')));
+        $qr = base64_encode(QrCode::size(50)->generate(route('review')));
         $pdf = Pdf::loadView('employeeViews.receipt', compact(['order', 'qr']))
         ->setPaper([0, 0, 240, 283], 'portrait');
 
