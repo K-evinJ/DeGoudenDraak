@@ -42,7 +42,30 @@ class PlanningController extends Controller
         ->where('start_time', $validated['start_time'])
         ->exists();
 
-        if ($exists) {
+        $overlap = DB::table('employee_planning')
+            ->where('table_id', $validated['table_id'])
+            ->where('employee_id', $validated['employee_id'])
+            ->where('date', $validated['date'])
+            ->where(function ($query) use ($validated) {
+                $query
+                    // New start is between existing range
+                    ->whereBetween('start_time', [$validated['start_time'], $validated['end_time']])
+                    // OR new end is between existing range
+                    ->orWhereBetween('end_time', [$validated['start_time'], $validated['end_time']])
+                    // OR existing start is between new range
+                    ->orWhere(function ($sub) use ($validated) {
+                        $sub->where('start_time', '>=', $validated['start_time'])
+                            ->where('start_time', '<', $validated['end_time']);
+                    })
+                    // OR existing end is between new range
+                    ->orWhere(function ($sub) use ($validated) {
+                        $sub->where('end_time', '>', $validated['start_time'])
+                            ->where('end_time', '<=', $validated['end_time']);
+                    });
+            })
+            ->exists();
+
+        if ($exists || $overlap) {
             return back()
                 ->with(['message' => 'Deze werknemer is al gepland voor deze tafel op dit tijdstip.']);
         }
