@@ -1,96 +1,113 @@
 <x-employeeLayout>
-
     @section('scripts')
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     @endsection
 
-    <div class="flex flex-col w-[100vw] p-5">
-        <div id="app">
-            <form class="flex w-full border border-blue-400 rounded-lg p-5">
-                <input type="text" name="search" id="search">
-                
-            </form>
-        </div>
-        <div class="flex">
-            <div class="overflow-y-auto overflow-x-none h-160 w-[60%] mt-5 border border-blue-400 rounded-l-lg p-5">
-                @foreach ($groupedDishes as $type => $dishes)
-                    <h2 class="font-semibold text-lg justify-self-center">{{ strtoupper($type) }}</h2>
-                    @foreach ($dishes as $dish)
-                        <div class="flex justify-between items-center my-1 text-sm">
-                            <div class="flex w-8/10">
-                                <p class="w-2/10">{{ $dish->full_number }}.</p>
-                                <p class="w-8/10">{{ $dish->name }}</p>
-                            </div>
-                            <p>€{{ $dish->current_price }}</p>
-                            <button class="addMenuItem px-2 border border-black rounded bg-gray-200 hover:bg-gray-300"
-                                value='{{ $dish->id }}'>toevoegen</button>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
-            <div class="h-165 border border-blue-500 m-2"></div>
-            <div>
-                <form method="post" action="{{ route('orderCashregister') }}">
-                    @csrf
-                    <div class="border border-blue-400 rounded-l mt-5 overflow-y-auto h-144">
-                        <table class='itemSelectedTable w-full'>
-                            <thead>
-                                <tr>
-                                    <th colspan="4" class="text-center font-semibold text-lg pt-5">
-                                        Bestelling
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="flex flex-col">
-                                @foreach ($groupedDishes as $type => $dishes)
-                                    @foreach ($dishes as $dish)
-                                        <tr class="flex hidden menuItem_{{ $dish->id }}"
-                                            data-price="{{ $dish->current_price }}">
-                                            <td class="mx-5 w-10">
-                                                <p>{{ $dish->full_number }}.</p>
-                                            </td>
-                                            <td class="mx-5 w-100">
-                                                <p>{{ $dish->name }}</p>
-                                            </td>
-                                            <td class="mx-5 w-15">
-                                                <p>€{{ number_format($dish->current_price, 2) }}</p>
-                                                <p class="hidden subAmount"></p>
-                                            </td>
-                                            <td>
-                                                <input class="border border-gray-400 w-20 rounded" type="number"
-                                                    name="dishes[{{ $dish->id }}]" min="0">
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="itemsSelectedTotal" class="p-4 border border-blue-400 rounded w-180">
-                        <div class="flex items-center">
-                            <!-- Left side: Totaal text -->
-                            <p class="flex-grow font-semibold text-lg">
-                                Totaal:
-                            </p>
-
-                            <!-- Right side: price and buttons -->
-                            <div class="flex items-center space-x-6">
-                                <div class="text-lg font-semibold flex items-center">
-                                    <span>€&nbsp;</span>
-                                    <span class="totalAmount">0,00</span>
-                                </div>
-
-                                <div class="flex space-x-2">
-                                    <button id="payOrder" type="submit"
-                                        class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
-                                        Afrekenen
-                                    </button>
+    <div class="flex w-[100vw] p-5">
+        <div class="flex flex-col w-[62vw]">
+            <div id="app" class="flex w-full border border-blue-400 rounded-lg p-5 gap-x-3 items-end">
+                <form action="" class="flex items-end">
+                    <label for="search" class="flex flex-col">Zoeken:
+                        <input type="text" name="search" id="search" class="border rounded-lg px-3 py-2">
+                    </label>
+                    <button type="submit"
+                        class="px-2 border border-black rounded bg-gray-200 hover:bg-gray-300 ms-2">Sorteer</button>
                 </form>
-                <button id="clearOrder" type="button"
-                    class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
-                    Verwijderen
-                </button>
+                <form action="" class="flex items-end">
+                    <label for="category" class="flex flex-col">Categorie filteren:
+                        <select name="category" id="category"
+                            class="border rounded-lg px-3 py-3 divide-y divide-gray-100">
+                            <option value="all" class="py-2">Alle Categorieën</option>
+                            @foreach ($groupedDishes as $type => $dishes)
+                                <option value="{{ $type }}" class="py-2">{{ ucfirst($type) }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <button type="submit"
+                        class="px-2 border border-black rounded bg-gray-200 hover:bg-gray-300 ms-2">Filter</button>
+                </form>
             </div>
+            <div class="flex">
+                <div class="overflow-y-auto overflow-x-none h-160 w-full mt-5 border border-blue-400 rounded-l-lg p-5">
+                    @foreach ($groupedDishes as $type => $dishes)
+                        <h2 class="font-semibold text-lg justify-self-center">{{ strtoupper($type) }}</h2>
+                        @foreach ($dishes as $dish)
+                            <div class="flex justify-between items-center my-1 text-sm w-full">
+                                <p>{{ $dish->full_number }}. {{ $dish->name }}</p>
+                                <div class="flex">
+                                    <p>€{{ $dish->current_price }}</p>
+                                    <button
+                                        class="addMenuItem px-2 border border-black rounded bg-gray-200 hover:bg-gray-300 ms-2"
+                                        value='{{ $dish->id }}'>toevoegen</button>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="h-165 border border-blue-500 m-2"></div>
+        <div class="w-[38vw]">
+            <form method="post" action="{{ route('orderCashregister') }}">
+                @csrf
+                <div class="border border-blue-400 rounded-l mt-5 overflow-y-auto h-144">
+                    <table class='itemSelectedTable w-full'>
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="text-center font-semibold text-lg pt-5">
+                                    Bestelling
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="flex flex-col">
+                            @foreach ($groupedDishes as $type => $dishes)
+                                @foreach ($dishes as $dish)
+                                    <tr class="flex hidden menuItem_{{ $dish->id }}"
+                                        data-price="{{ $dish->current_price }}">
+                                        <td class="mx-5 w-10">
+                                            <p>{{ $dish->full_number }}.</p>
+                                        </td>
+                                        <td class="mx-5 w-100">
+                                            <p>{{ $dish->name }}</p>
+                                        </td>
+                                        <td class="mx-5 w-15">
+                                            <p>€{{ number_format($dish->current_price, 2) }}</p>
+                                            <p class="hidden subAmount"></p>
+                                        </td>
+                                        <td>
+                                            <input class="border border-gray-400 w-20 rounded" type="number"
+                                                name="dishes[{{ $dish->id }}]" min="0">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div id="itemsSelectedTotal" class="p-4 border border-blue-400 rounded w-180">
+                    <div class="flex items-center">
+                        <!-- Left side: Totaal text -->
+                        <p class="flex-grow font-semibold text-lg">
+                            Totaal:
+                        </p>
+
+                        <!-- Right side: price and buttons -->
+                        <div class="flex items-center space-x-6">
+                            <div class="text-lg font-semibold flex items-center">
+                                <span>€&nbsp;</span>
+                                <span class="totalAmount">0,00</span>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button id="payOrder" type="submit"
+                                    class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
+                                    Afrekenen
+                                </button>
+            </form>
+            <button id="clearOrder" type="button"
+                class="px-3 my-1 border border-black rounded bg-gray-200 hover:bg-gray-300 text-sm">
+                Verwijderen
+            </button>
         </div>
     </div>
     <div id="successModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
@@ -105,7 +122,6 @@
                     class="text-gray-600 text-2xl leading-none hover:text-black">&times;</button>
             </div>
         </div>
-    </div>
     </div>
 </x-employeeLayout>
 
