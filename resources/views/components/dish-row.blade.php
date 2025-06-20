@@ -8,7 +8,7 @@
                     <strong class="text-nowrap">{{ $dish->number }}{{ $dish->menu_addition ?? '' }}. {{ $dish->name }}</strong>
                     <strong class="text-lg">€ {{ number_format($dish->price, 2, ',', '.') }}</strong>
                 </div>
-                <i class="self-start">{{ $dish->description ?? 'geen beschrijving.' }}</i>
+                <i class="self-start">{{ $dish->description ?? '' }}</i>
             </div>
             <form action="{{ route($action) }}" method="POST" class="self-center">
                 @csrf
