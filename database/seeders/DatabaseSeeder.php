@@ -25,8 +25,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('1234'),
             'isAdmin' => true,
         ]);
-        Employee::factory()->create();
-        Dish::factory(100)->create();
         News::create([
             'date' => Carbon::now(),
             'text' => 'Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.
