@@ -54,11 +54,12 @@ class CashRegisterController
         return redirect()->route('employee.cashRegister')->with('order_message', 'Verkoop succesvol!');
     }
 
-    public function downloadReceipt(Order $order){
+    public function downloadReceipt(Order $order)
+    {
         $qr = base64_encode(QrCode::size(50)->generate(route('review')));
         $pdf = Pdf::loadView('employeeViews.receipt', compact(['order', 'qr']))
         ->setPaper([0, 0, 240, 283], 'portrait');
 
-    return $pdf->download("Rekening_Order_{$order->id}.pdf");
+        return $pdf->download("Rekening_Order_{$order->id}.pdf");
     }
 }

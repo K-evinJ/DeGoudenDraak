@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->integer('number')->nullable();
             $table->string('menu_addition', 2)->nullable();
-            $table->string('name', 50);
+            $table->string('name', 100);
             $table->decimal('price', 5, 2);
             $table->string('description', 300)->nullable();
             $table->boolean('visible');

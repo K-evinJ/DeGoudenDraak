@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\Table;
 use Carbon\Carbon;
@@ -11,16 +13,16 @@ class PlanningController extends Controller
 {
     public function index(Request $request)
     {
-        $tables = \App\Models\Table::all();
+        $tables = Table::all();
         $selectedTableId = $request->get('table_id', $tables->first()?->id);
         $startDate = Carbon::now()->startOfDay();
-        $endDate = $startDate->copy()->addDays(6); 
+        $endDate = $startDate->copy()->addDays(6);
 
         $table = Table::with(['employees' => function ($query) use ($startDate, $endDate) {
             $query->whereBetween('employee_planning.date', [$startDate, $endDate]);
         }])->find($selectedTableId);
 
-        $employees = \App\Models\Employee::all();
+        $employees = Employee::all();
 
         return view('EmployeeViews.employeePlanning', compact('tables', 'table', 'employees', 'startDate'));
     }
@@ -36,11 +38,11 @@ class PlanningController extends Controller
         ]);
 
         $exists = DB::table('employee_planning')
-        ->where('table_id', $validated['table_id'])
-        ->where('employee_id', $validated['employee_id'])
-        ->where('date', $validated['date'])
-        ->where('start_time', $validated['start_time'])
-        ->exists();
+            ->where('table_id', $validated['table_id'])
+            ->where('employee_id', $validated['employee_id'])
+            ->where('date', $validated['date'])
+            ->where('start_time', $validated['start_time'])
+            ->exists();
 
         $overlap = DB::table('employee_planning')
             ->where('table_id', $validated['table_id'])
@@ -91,8 +93,8 @@ class PlanningController extends Controller
             ->wherePivotBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
             ->withPivot('date', 'start_time', 'end_time')
             ->get()
-            ->sortBy(fn ($table) => $table->pivot->start_time)
-            ->groupBy(fn ($table) => $table->pivot->date);
+            ->sortBy(fn($table) => $table->pivot->start_time)
+            ->groupBy(fn($table) => $table->pivot->date);
 
         return view('EmployeeViews.employeePlanningView', compact('tables', 'startDate'));
     }

@@ -18,7 +18,7 @@ class ReviewController extends Controller
         $request->validate([
             'rating' => ['required'],
             'comment' => ['required'],
-        ], 
+        ],
         [
             'rating.required' => 'Het aantal sterren is verplicht.',
             'comment.required' => 'Een commentaar is verplicht.',
