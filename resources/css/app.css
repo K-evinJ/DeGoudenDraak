@@ -33,7 +33,7 @@
 
 .scroll-left {
     position: relative;
-    width: 40vw; /* Adjust as needed */
+    width: 40vw;
     overflow: hidden;
     white-space: nowrap;
     height: 24px;
