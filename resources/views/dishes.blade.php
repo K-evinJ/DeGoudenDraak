@@ -32,11 +32,11 @@
         @if (!$favorites->isempty())
             <strong class="text-lg text-center">Favorieten</strong>
         @endif
-        <x-dish-row :types="$favorites" :action="'unfavorite'">Verwijder favoriet</x-dish-row>
+        <x-dish-row :dishes="$favorites" :action="'unfavorite'">Verwijder favoriet</x-dish-row>
         @if (!$favorites->isempty())
             <hr class="border-1 border-dashed my-5">
         @endif
-        <x-dish-row :types="$nonFavorites" :action="'favorite'">Maak favoriet</x-dish-row>
+        <x-dish-row :dishes="$nonFavorites" :action="'favorite'">Maak favoriet</x-dish-row>
     </div>
 </body>
 

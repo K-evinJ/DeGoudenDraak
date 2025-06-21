@@ -26,7 +26,7 @@
                         class="flex justify-between items-center my-1 text-sm w-full font-normal">
                         <p>@{{ dish.number }}@{{ dish.menu_addition }}. @{{ dish.name }}</p>
                         <div class="flex">
-                            <p>€ @{{ dish.price }}</p>
+                            <p>€ @{{ dish.price.replace('.', ',') }}</p>
                             <button @click="addToOrder(dish.id)"
                                 class="addMenuItem px-2 border border-black rounded bg-gray-200 hover:bg-gray-300 ms-2">toevoegen</button>
                         </div>
@@ -43,7 +43,7 @@
                     class="flex justify-between items-center my-1 text-sm w-full font-normal">
                     <p>@{{ dish.number }}@{{ dish.menu_addition }}. @{{ dish.name }}</p>
                     <div class="flex items-center">
-                        <p>€ @{{ dish.price }}</p>
+                        <p>€ @{{ dish.price.replace('.', ',') }}</p>
                         <input @change="checkCount(dish.count)" type="number" min="0" v-model="dish.count"
                             class="ms-2 border border-gray-400 rounded px-2 py-1 w-20">
                     </div>

@@ -50,13 +50,11 @@ class MenuController extends Controller
         $favorites = Dish::where('visible', 1)
             ->whereIn('id', $favoriteIds)
             ->orderby($favoriteSort, $favoriteOrder)
-            ->get()
-            ->groupby('dish_type');
+            ->get();
         $nonFavorites = Dish::where('visible', 1)
             ->whereNotIn('id', $favoriteIds)
             ->orderby($normalSort, $normalOrder)
-            ->get()
-            ->groupby('dish_type');
+            ->get();
         return view('dishes', ['favorites' => $favorites, 'nonFavorites' => $nonFavorites, 'options' => $options]);
     }
 
